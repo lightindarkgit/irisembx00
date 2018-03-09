@@ -1,0 +1,100 @@
+<RCC>
+    <qresource prefix="/">
+        <file>image/09.ico</file>
+        <file>image/010.png</file>
+        <file>image/121.png</file>
+        <file>image/add.png</file>
+        <file>image/alert.png</file>
+        <file>image/app.ico</file>
+        <file>image/back3.jpg</file>
+        <file>image/bg.png</file>
+        <file>image/binoculars.png</file>
+        <file>image/chart_base.png</file>
+        <file>image/circulation.png</file>
+        <file>image/cross.png</file>
+        <file>image/door.png</file>
+        <file>image/eye.jpg</file>
+        <file>image/eye3.jpg</file>
+        <file>image/eye12.jpg</file>
+        <file>image/file.jpg</file>
+        <file>image/find.png</file>
+        <file>image/home.jpg</file>
+        <file>image/IrisK.ico</file>
+        <file>image/jtbq_001.ico</file>
+        <file>image/jtbq_002.ico</file>
+        <file>image/jtbq_003.ico</file>
+        <file>image/jtbq_004.ico</file>
+        <file>image/jtbq_021.ico</file>
+        <file>image/jtbq_022.ico</file>
+        <file>image/loading6.gif</file>
+        <file>image/loading45.gif</file>
+        <file>image/person.png</file>
+        <file>image/picture.jpg</file>
+        <file>image/png-0701.png</file>
+        <file>image/police.png</file>
+        <file>image/printer.png</file>
+        <file>image/restart.png</file>
+        <file>image/shell32_1_28.ico</file>
+        <file>image/stop.png</file>
+        <file>image/system-reboot.png</file>
+        <file>image/tools.png</file>
+        <file>image/user.png</file>
+        <file>image/2-p1.jpg</file>
+        <file>image/back1.jpg</file>
+        <file>image/back2.jpg</file>
+        <file>image/back_1.jpg</file>
+        <file>image/12.ico</file>
+        <file>image/13.ico</file>
+        <file>image/14.ico</file>
+        <file>image/33310.ico</file>
+        <file>image/33312.ico</file>
+        <file>image/33318.ico</file>
+        <file>image/33323.ico</file>
+        <file>image/back.ico</file>
+        <file>image/folder.ico</file>
+        <file>image/ical.ico</file>
+        <file>image/id_rsa.pub</file>
+        <file>image/notesicon.ico</file>
+        <file>image/ok.ico</file>
+        <file>image/preferencesicon.ico</file>
+        <file>image/publicfolder.ico</file>
+        <file>image/qt_zh_CN.qm</file>
+        <file>image/question.ico</file>
+        <file>image/screensaver.ico</file>
+        <file>image/search.ico</file>
+        <file>image/shutdown.ico</file>
+        <file>image/shutdown0.ico</file>
+        <file>image/standby.ico</file>
+        <file>image/switch%20user.ico</file>
+        <file>image/trashicon2.ico</file>
+        <file>image/up.ico</file>
+        <file>image/wlm.ico</file>
+        <file>image/xport.ico</file>
+        <file>image/stop.ico</file>
+        <file>image/start.ico</file>
+        <file>image/iden.png</file>
+        <file>image/256x256 (115).png</file>
+        <file>image/256x256 (342).png</file>
+        <file>image/256x256 (848).png</file>
+        <file>image/256x256 (1599).png</file>
+        <file>image/256x256 (1723).png</file>
+        <file>image/256x256 (833).png</file>
+        <file>image/shutdow3.ico</file>
+        <file>image/shutdown4.ico</file>
+        <file>image/33303.ico</file>
+        <file>image/33306.ico</file>
+        <file>image/33313.ico</file>
+        <file>image/Untitled-2.ico</file>
+        <file>image/XP系统~21.ICO</file>
+        <file>image/XP系统~24.ICO</file>
+        <file>image/XP系统~31.ICO</file>
+        <file>image/符号标~1.ICO</file>
+        <file>image/符号标~2.ICO</file>
+        <file>image/edit.ico</file>
+        <file>image/previouspage.ico</file>
+        <file>image/camera.ico</file>
+        <file>image/add.ico</file>
+        <file>image/minus.ico</file>
+        <file>image/time.ico</file>
+    </qresource>
+</RCC>

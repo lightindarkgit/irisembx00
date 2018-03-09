@@ -1,0 +1,5 @@
+1、查看install_gtest是否有执行权限，否则执行：
+chmod +x install_gtest
+2、在SHELL窗口执行   ./install_getst
+3、等待结果，如果没有出现错误即成功。
+4、设置了GTEST_DIR这个环境变量

@@ -1,0 +1,56 @@
+1.用户登录 admin md5("123456")
+GET
+http://10.2.10.42:99/api/usermgr/login?loginid=admin&password=21232f297a57a5a743894a0e4a801fc3
+
+POST
+http://10.2.10.42:99/api/usermgr/login
+body
+{
+	"loginId":"admin",
+	"password":"21232f297a57a5a743894a0e4a801fc3"
+}
+
+2.注销登录
+GET
+http://10.2.10.42:99/api/usermgr/logout?token={0}
+
+3.获取用户列表
+GET
+http://10.2.10.42:99/api/usermgr/page?token={0}&index={1}&take={2}
+
+4.修改帐号--目前仅能修改用户名字和位置
+POST
+http://10.2.10.42:99/api/usermgr/modify?token={0}
+body
+{
+	"loginId":"user_id",
+	"userName":"新名字",
+	"workspace":"西直门外大街"
+}
+
+
+5.修改密码
+POST
+http://10.2.10.42:99/api/usermgr/change?token={0}
+body
+{
+	"loginId":"user_id",
+	"password":"md5"
+}
+
+6.删除用户
+POST 
+http://10.2.10.42:99/api/usermgr/remove?token={0}
+body
+["user_id1","user_id2"]
+
+7.添加用户
+POST 
+http://10.2.10.42:99/api/usermgr/create?token={0}
+body
+{
+	"loginId":"user_id",
+	"userName":"user_real_name",
+	"password":"md5_password",
+	"workspace":"西直门外大街"
+}

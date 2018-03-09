@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1024</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>虹膜识别系统</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="ikembx00.qrc">
+    <normaloff>:/image/IrisK.ico</normaloff>:/image/IrisK.ico</iconset>
+  </property>
+  <property name="toolButtonStyle">
+   <enum>Qt::ToolButtonTextBesideIcon</enum>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>16777215</height>
+    </size>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="margin">
+     <number>0</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="QStackedWidget" name="stackedWidget">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="lineWidth">
+       <number>1</number>
+      </property>
+      <property name="currentIndex">
+       <number>2</number>
+      </property>
+      <widget class="QWidget" name="pageIdentify"/>
+      <widget class="QWidget" name="pageIrisLogin"/>
+      <widget class="QWidget" name="pageManager"/>
+      <widget class="QWidget" name="pagePerson"/>
+      <widget class="QWidget" name="pageSysterm"/>
+      <widget class="QWidget" name="pageDataManager"/>
+      <widget class="QWidget" name="pageShutDown"/>
+      <widget class="QWidget" name="pageHelp"/>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <action name="clock_in_action">
+   <property name="text">
+    <string>上班打卡</string>
+   </property>
+  </action>
+  <action name="clock_out_action">
+   <property name="text">
+    <string>下班打卡</string>
+   </property>
+  </action>
+  <action name="login_for_admin_action">
+   <property name="text">
+    <string>用户名登陆</string>
+   </property>
+  </action>
+  <action name="login_for_iris_action">
+   <property name="text">
+    <string>虹膜登陆 </string>
+   </property>
+  </action>
+  <action name="about_action">
+   <property name="text">
+    <string>关于</string>
+   </property>
+  </action>
+  <action name="actionPageIdentify">
+   <property name="text">
+    <string>识别</string>
+   </property>
+  </action>
+  <action name="actionIrisLogin">
+   <property name="text">
+    <string>IrisLogin</string>
+   </property>
+   <property name="toolTip">
+    <string>虹膜管理员登陆</string>
+   </property>
+  </action>
+  <action name="actionManager">
+   <property name="text">
+    <string>Manager</string>
+   </property>
+   <property name="toolTip">
+    <string>管理界面</string>
+   </property>
+  </action>
+  <action name="actionPerson">
+   <property name="text">
+    <string>Person</string>
+   </property>
+   <property name="toolTip">
+    <string>人员管理界面</string>
+   </property>
+  </action>
+  <action name="actionSysterm">
+   <property name="text">
+    <string>Systerm</string>
+   </property>
+   <property name="toolTip">
+    <string>系统管理界面</string>
+   </property>
+  </action>
+  <action name="actionDataManager">
+   <property name="text">
+    <string>DataManager</string>
+   </property>
+   <property name="toolTip">
+    <string>数据管理</string>
+   </property>
+  </action>
+  <action name="actionShutDown">
+   <property name="text">
+    <string>ShutDown</string>
+   </property>
+   <property name="toolTip">
+    <string>关机</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="text">
+    <string>Help</string>
+   </property>
+   <property name="toolTip">
+    <string>帮助</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="ikembx00.qrc"/>
+ </resources>
+ <connections/>
+</ui>

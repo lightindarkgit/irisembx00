@@ -1,0 +1,9 @@
+
+
+
+
+QDialog#Enroll
+{
+    background-image: url(:/image/ui_mainmenu_background.png);
+
+}

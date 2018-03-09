@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IKEMBX00>
+  <configures>
+      configures for ikemx00 porject
+      <server>
+          <ip>192.168.1.11</ip>
+          <port>9999</port>
+      </server>
+      <identify>
+          <belltime>5</belltime>
+          <identmode>
+               <card>false</card>
+               <iris>true</iris>
+          </identmode>
+          <outwiegand>false</outwiegand>
+          <outio>false</outio>
+      </identify> 
+      <login>
+          <downtime>30</downtime>
+      </login>  
+      <language>chinese</language> 
+      <systemsleep>30</systemsleep> 
+      <alarm>
+          <alarm1st>02:00:00</alarm1st>
+          <alarm2nd>01:06:00</alarm2nd>
+          <alarm3rd>11:00:00</alarm3rd>
+          <alarm4th>10:00:00</alarm4th>
+          <alarm5th>05:00:00</alarm5th>
+          <alarm6th>03:00:00</alarm6th>
+          <alarm7th>10:00:00</alarm7th>
+          <alarm8th>15:33:00</alarm8th>
+      </alarm>
+      <alarmduration>20</alarmduration>
+      <workmode>offline</workmode>
+      <city>北京</city>
+  </configures>
+</IKEMBX00>

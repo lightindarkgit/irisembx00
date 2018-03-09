@@ -1,0 +1,345 @@
+#Path:
+#Author: Wang.L
+#Create Time: 2014-06-04
+#CanDo: Update ikemx00 application and it's libraries, at the same time, other relevant files also included
+#Details:
+#
+
+
+
+#Application path
+app_path="/home/irisking/ikembx00"
+#Backup old application to the path
+backup_path="$app_path".bak
+#Update package name as a relative path
+update_package_name="update.tar.gz"
+#Update package's absolute path
+update_package_path=""
+#Directory for placing extracted update package
+temp_path="/home/irisking/temp_ikembx00"
+#From th path to search update package 
+root_path="/media"
+usb_dir="/media/irisking"
+update_files=""
+
+pass_word=""
+
+log_file="/home/irisking/shell/update_log.txt"
+updatetracker="/home/irisking/updatetracker"
+
+#mount_usb_disk()
+#{
+#    echo "mounting usb disk..." >> "$log_file"
+#    local tmp_dir=""
+#    for tmp_dir in `ls /dev/sd*`
+#    do
+#       udev=${tmp_dir##*/}
+#       if [ "sdb" = "${udev:0:3}" ]
+#       then
+#           if [ "$udev" = "sdb" ]
+#           then
+#               continue
+#           fi
+#
+#           if [ ! -d "$root_path/$udev" ]
+#           then
+#               echo "$pass_word" | sudo mkdir "$root_path/$udev"
+#           fi
+#   
+#           if [ -d "$root_path/$udev" ]
+#           then
+#               echo "$pass_word" | sudo chmod 766 "$root_path/$udev"
+#           fi
+#
+#           if [ "$?" -eq "0" ]
+#           then
+#               echo "$root_path/$udev has mounted!!" >> "$log_file"
+#               echo "$pass_word" | sudo mount "/dev/$udev" "$root_path/$udev"
+#           fi
+#        fi
+#    done
+#}
+##############################################################################
+
+mount_usb_disk()
+{
+    echo "mounting usb disk..." >> "$log_file"
+    local tmp_dir=""
+    # 遍历所有的设备
+    for tmp_dir in `ls /dev/sd*`
+    do
+       echo "tmp_dir:$tmp_dir" >> "$log_file"
+       udev=${tmp_dir##*/}
+	# 如果是第一块磁盘,就不搭理它,10%是系统盘
+       if [ "sda" = "${udev:0:3}" ];
+	   then
+			echo  "Ignore  $udev" >> "$log_file"
+			continue
+       fi
+
+     echo "mount -step 1 udev:0:2----${udev:0:2}" >> "$log_file"
+
+       if [ "sd" = "${udev:0:2}" ]
+       then
+	   # 不是磁盘号
+	   echo "mount -step 2" >> "$log_file"
+           if [ ${#udev} = 3 ]
+           then
+		echo  "Ignore2  $udev" >> "$log_file"
+               	continue
+           fi
+
+	   # 如果没有挂载目录,则创建它
+           if [ ! -d "$sub_dir" ];
+           then
+		echo "mount -step 3" >> "$log_file"
+		echo "$pass_word" | sudo mkdir -p "$usb_dir"
+		if [ $? -eq 0 ]; then
+			echo "$pass_word" | sudo chmod 766 "$usb_dir"
+		fi
+           fi
+
+		# 如果磁盘已经被挂载,先卸载
+		echo "mount -step 4">>"$log_file"
+		count=`mount |grep $sub_dir  |wc  -l`
+		if [ $count -gt 0 ]; then
+			echo "$pass_word" | sudo umount "$usb_dir"
+		fi
+
+	    echo "mount -step 5" >> "$log_file"
+	   # 挂载磁盘到指定目录
+           if [ $? -eq 0 ]
+           then
+               	echo "$pass_word" | sudo mount "/dev/$udev" "$usb_dir" -o iocharset=utf8
+               	echo  "sudo mount /dev/$udev $usb_dir" >> "$log_file"
+           fi
+	else
+	   echo "mount -step6 sd!=${udev:0:3}" >> "$log_file"
+       fi
+    done
+}
+
+
+
+
+##############################################################################
+umount_usb_disk()
+{  
+    echo "unmount usb disk..." >> "$log_file"
+    tmp_dir="" 
+    for tmp_dir in `ls $root_path`
+    do
+        udev=${tmp_dir##*/}
+        if [ "$udev" = "sdb" ] || [ "${#udev}" -lt "3" ]
+        then
+            continue
+        fi
+ 
+        if [ "sd" = "${udev:0:2}" ]
+        then
+            echo "$udev is being umounted..." >> "$log_file"
+            echo "$pass_word" | sudo umount "$root_path/$udev"
+            echo "$pass_word" | sudo rm -rf "$root_path/$udev"
+        fi
+    done
+}
+
+#Delete backup package of old application
+delete_backup_package()
+{
+    if [ -d "$backup_path" ]
+    then
+        echo "Deleting backup package of old ikembx00 application..." >> "$log_file"
+        rm -fr "$backup_path"
+    fi
+}
+
+
+#Notice: update package's name must satisfy "update.tar.gz" format
+#Search update package from USB mass storage device,which is mounted to "/media/" directory
+search_update_package()
+{
+    echo "checking update package whether exists..." >> "$log_file"
+    for sub_path in `ls $root_path`
+    do
+        echo "traversing $root_path/$sub_path">>"$log_file"
+        echo "root_path:$root_path">>"$log_file"
+	echo "sub_path: $sub_path">>"$log_file"
+        for cur_path in `ls $root_path/$sub_path`
+        do
+		echo "cur_path---->$cur_path" >>"$log_file"
+           	echo "traversing2 $root_path/$sub_path/$cur_path">>"$log_file"
+                echo "$update_package_name" >> "$log_file"
+	     if [ "$update_package_name" = "$cur_path" ]
+	     then
+		update_package_path="$root_path/$sub_path/$cur_path"
+                echo "update package was found and it's path: $update_package_path" >> "$log_file"
+		break
+	     fi
+            ##############################################################
+	   # for package_file in `ls $root_path/$sub_path/$cur_path` 
+	   # do
+		#echo "packagename:$update_package_name;package_file:$package_file">>"$log_file"
+		#if [ -f "$package_file" ] 
+		#then
+		#update_package_path="$package_file"
+
+                #echo "1update package was found and it's path: $update_package_path" >> "$log_file"
+                #break  
+                #fi
+	    #done
+           ###########################################################################
+        done
+    done 
+}
+
+
+#Backup old application before updating operation
+backup_old_app()
+{
+    e2ckage_name=cho "backing up old application..." >> "$log_file"
+    #Delete old backup package if it exists
+    delete_backup_package
+
+
+    #Get the file list being updated
+    test -d "$backup_path" || mkdir "$backup_path"
+    test -d "$temp_path" || mkdir "$temp_path" 
+
+    echo "copying update package to temporary path: $temp_path..." >> "$log_file"
+    cp "$update_package_path" "$temp_path"    
+    tar zxvf "$temp_path"/"$update_package_name"  -C "$temp_path"
+
+    for f in `ls "$temp_path"`
+    do
+        if [ -d "$temp_path"/"$f" ]
+        then
+            echo "backing up directory $f: $app_path/$f -> $backup_path..." >> "$log_file"
+            cp -rf "$app_path"/"$f" "$backup_path"
+        elif [ -f "$temp_path"/"$f" ]
+        then
+            echo "backing up file $f: $app_path/$f -> $backup_path..." >> "$log_file"
+            cp -f  "$app_path"/"$f" "$backup_path"
+        else
+            echo "the file('$temp_path'/'$f') will not be handled!!!" >> "$log_file"
+        fi
+    done
+
+    #Log updated files
+    update_files=`ls -Rh --full-time $temp_path`
+    rm -f "$tmp_path/$update_package_name"
+}
+
+
+#In case of failing to update, restore old application
+resotre_old_app()
+{
+     ##Delete unfinished updating directory if it exists
+     #if [ -d "$app_path" ]
+     #then
+     #    echo "removing unfinished update  files..." >> "$log_file"
+     #    #rm -rf "$app_path" 
+     #fi
+
+    #Restore application
+    if [ -d "$backup_path" ]
+    then
+        echo ",and we are trying to restore old one..." >> "$log_file"
+        cp -rf "$backup_path"/* "$app_path"
+    else
+        echo "no package was found, maybe your device is a brand new one!!" >> "$log_file"
+    fi 
+}
+
+delete_temp_path()
+{
+    rm -rf "$temp_path"
+}
+
+
+
+#Update application with found by has_detected_update_package()
+update_app()
+{
+    #No need to unexpress tar file
+    echo "updating is starting ..." >> "$log_file"
+
+    #Backup old application files to restore, in case of failing to update application
+    backup_old_app
+
+    if [ -d "$app_path" ]
+    then
+        echo
+    else
+        mkdir "$app_path"  
+        chown irisking -hR "$app_path"
+    fi
+
+    echo "replacing old ikembx00 application with new ikembx00 application... " >> "$log_file"
+    cp -rf "$temp_path"/*  "$app_path"
+    
+
+    if [ "$?" -eq "0" ]
+    then
+       echo "Change directory's authority to make it executable"
+       echo "$pass_word" | chmod 766 "$app_path"/ikembx00
+       #Update shared libraries needed by ikembx00
+       echo "$pass_word" | sudo ldconfig
+    else
+       echo "update application failed, restoring old application..." >> "$log_file"
+       resotre_old_app
+    fi
+
+    #Delete the backup directroy of old application
+    delete_backup_package
+    delete_temp_path
+    echo "updating has been finished!!!" >> "$log_file"
+
+   
+    echo "~~~~~~~~~~~~~~~~~~~~~~~~~~UPDATETRACKER STARTS~~~~~~~~~~~~~~~~~~~~~~~~~~~~" >> $updatetracker
+    echo "update time: `date`" >> "$updatetracker"
+    echo "the following files (or) directories has been updated:" >> $updatetracker
+    echo $update_files >> "$updatetracker"
+    echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~UPDATETRACKER ENDS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" >> $updatetracker
+}
+
+
+#Check update package's validate
+check_update_package()
+{
+# To make sure the update package is valid by checking it's file number and it's total size 
+    echo "check_update_package was called!"   
+}
+
+
+#Update ikembx00 application interface
+update_app_ikembx00()
+{
+    set +e
+    echo "~~~~~~~~~~~~~~~~~~~~~~~~~~UPDATING STARTS FROM HERE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" >> $log_file
+    #Mount usb device
+    mount_usb_disk
+
+    #Search the update package  
+    search_update_package
+ 
+    #Check the result of searching update package
+    if [ -f "$update_package_path" ]
+    then 
+        #Check the validate of update package 
+        check_update_package
+        if [ "$?" -eq "0" ]
+        then
+            update_app
+        fi
+    else
+        echo "No need to update the application!!" >> "$log_file"
+    fi
+
+    #Unmount usb device
+    umount_usb_disk
+
+    echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~UPDATING ENDS HERE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" >> $log_file
+    set -e
+}
+ 

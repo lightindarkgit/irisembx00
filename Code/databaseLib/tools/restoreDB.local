@@ -1,0 +1,54 @@
+#!/bin/bash
+#
+# restoreDB.local
+#
+#
+# 缺省参数
+dbName="irisApp"
+dbFile="IKEmbX00DbSql.sql"
+
+
+# 对数据库删除、创建并添加数据的函数
+dbOperate()
+{
+# +e表示不查询指令是否执行正确
+# 删除数据库时，如数据库不存在会报错
+# 这种错误忽略
+# 如果该数据库正在被使用，也会报错
+# 用下面的createdb控制这种错误
+set +e
+dropdb -U postgres $dbName
+
+set -e
+
+createdb -U postgres -T template0 $dbName
+
+psql -U postgres -f $dbFile $dbName
+
+}
+
+
+# 如果第一个参数不为空，则认为是数据库名称
+if [ -n "$1" ]; then
+	dbName="$1"
+fi
+
+# 如果第二个参数不为空，则认为是恢复的文件名
+if [ -n "$2" ]; then 
+	dbFile="$2"
+fi
+
+echo "对数据库$dbName操作，恢复成$dbFile的数据……"	
+echo "是否继续？"
+select var in "yes" "no"; do
+	break;
+done
+
+# 选择第一个选项yes，才会继续执行
+if [ "$var" = "yes" ]; then
+	dbOperate
+	exit 0
+fi
+
+echo "退出本次执行。"
+exit 0

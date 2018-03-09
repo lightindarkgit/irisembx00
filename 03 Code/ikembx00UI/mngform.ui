@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MngForm</class>
+ <widget class="QWidget" name="MngForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>782</width>
+    <height>528</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>新考勤管理系统</string>
+  </property>
+  <widget class="Line" name="line">
+   <property name="geometry">
+    <rect>
+     <x>2</x>
+     <y>-2</y>
+     <width>778</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="Line" name="vLine">
+   <property name="geometry">
+    <rect>
+     <x>79</x>
+     <y>8</y>
+     <width>16</width>
+     <height>518</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
+   </property>
+  </widget>
+  <widget class="QWidget" name="wgtMainArea" native="true">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>9</y>
+     <width>690</width>
+     <height>515</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>690</width>
+     <height>515</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QToolBox" name="tbMenus">
+   <property name="geometry">
+    <rect>
+     <x>2</x>
+     <y>8</y>
+     <width>82</width>
+     <height>518</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>82</width>
+     <height>500</height>
+    </size>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="mgrCenter">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>82</width>
+      <height>422</height>
+     </rect>
+    </property>
+    <attribute name="label">
+     <string>管理中心</string>
+    </attribute>
+    <attribute name="toolTip">
+     <string>通过该选项可以完成人员管理、部门管理</string>
+    </attribute>
+   </widget>
+   <widget class="QWidget" name="sysOpts">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>82</width>
+      <height>422</height>
+     </rect>
+    </property>
+    <attribute name="label">
+     <string>系统选项</string>
+    </attribute>
+    <attribute name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;you can import or export relevant datas by this menu&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </attribute>
+   </widget>
+   <widget class="QWidget" name="devCfg">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>82</width>
+      <height>422</height>
+     </rect>
+    </property>
+    <attribute name="label">
+     <string>设备配置</string>
+    </attribute>
+   </widget>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

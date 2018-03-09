@@ -1,0 +1,8 @@
+#!/bin/bash
+g++ -I./include -I./ -c ./src/gtest-all.cc
+ar -rv libgtest.a gtest-all.o
+sudo mkdir /opt/gtest1.6
+sudo cp ./ -r -v *  /opt/gtest1.6 
+echo "GTEST_DIR=\"/opt/gtest1.6\"">>$HOME/.bashrc
+source $HOME/.bashrc
+

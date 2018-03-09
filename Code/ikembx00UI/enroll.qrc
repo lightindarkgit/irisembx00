@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>face.bmp</file>
+        <file>iris.bmp</file>
+    </qresource>
+</RCC>
